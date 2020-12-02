@@ -16,7 +16,7 @@ namespace Airline
     public partial class LoginForm : Form
     {
         #region INIT
-        private static LoginModel loginModel = new LoginModel();
+        
         public static string accountName;
         public static string loaiNguoiDung;
         private static ConnectToSQL connection =new ConnectToSQL();
@@ -49,10 +49,13 @@ namespace Airline
             
             bool check = loginController.Check_Login(username, password);
             if (check == true) {
+                loaiNguoiDung = LoginController.loaiNguoiDung;
+                Console.WriteLine(loaiNguoiDung);
                 this.Hide();
                 Form1 form = new Form1();
                 form.Show();
             }
+            
         }
 
         private void tbPassword_Leave(object sender, EventArgs e)
@@ -80,6 +83,8 @@ namespace Airline
                 bool check = loginController.Check_Login(username, password);
                 if (check == true)
                 {
+                    loaiNguoiDung = LoginController.loaiNguoiDung;
+                    
                     this.Hide();
                     Form1 form = new Form1();
                     form.Show();
@@ -99,6 +104,7 @@ namespace Airline
                 bool check = loginController.Check_Login(username, password);
                 if (check == true)
                 {
+                    loaiNguoiDung = LoginController.loaiNguoiDung;
                     this.Hide();
                     Form1 form = new Form1();
                     form.Show();

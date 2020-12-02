@@ -29,7 +29,7 @@ namespace Airline.Controller
                 check = true;
                 DataRow row = dataTable.Select()[0];
                 loaiNguoiDung = row[2].ToString();
-                
+                //Console.WriteLine("login COntroller" + loaiNguoiDung);
                 
             }
             return check;
