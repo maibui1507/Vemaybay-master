@@ -13,6 +13,8 @@ using System.Data.SqlClient;
 using System.Data.OleDb;
 using System.IO;
 using Airline.Model;
+using Airline.DAO;
+using Airline.Controller;
 
 namespace Airline
 {
@@ -24,8 +26,8 @@ namespace Airline
         ReportControl reportControl1=new ReportControl();
         RuleChangeControl ruleChangeControl1;
         static public SaleControl saleControl1;
-
-
+        private Form1Controller form1Controller = new Form1Controller();
+        
 
         public Form1()
         {
@@ -45,156 +47,24 @@ namespace Airline
             searchControl1.Visible = true;
             searchControl1.BringToFront();
         }
-        private bool CheckUser(string s)
-        { 
-            if (s == "True")
-            {
-                return true;
-            }
-            return false;
-        }
+        //private bool CheckUser(string s)
+        //{ 
+        //    if (s == "True")
+        //    {
+        //        return true;
+        //    }
+        //    return false;
+        //}
 
         private void dataBt_Click(object sender, EventArgs e)
         {
-            
-            if (CheckUser(LoginForm.loaiNguoiDung))
-            {
-
-                openFileDialog1.Filter = "Excel | *.xlsx; *.xls| All File (*.*)|*.*";
-                openFileDialog1.ShowDialog();
-                if (openFileDialog1.FileName != "")
-                {
-                    //Console.WriteLine(openFileDialog1.FileName);
-                    // tạo đối tượng excel
-                    Excel.Application xlApp = new Excel.Application();
-                    LoginModel.Connection.OpenConn();
-                    try
-                    {
-                        Excel.Workbook workbook = xlApp.Workbooks.Open(openFileDialog1.FileName);
-                        for (int i = 1; i < 4; i++)
-                        {
-                            // mở tệp
-                            
-                            Excel.Workbook xlWorkbook = workbook;
-                            Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[i];
-                            Excel.Range range = xlWorksheet.UsedRange;
-                            object[,] valueArray = (object[,])range.get_Value(Excel.XlRangeValueDataType.xlRangeValueDefault);
-                            int row = valueArray.GetLength(0);
-                            string command = "";
-                            switch (i)
-                            {
-                                case 1: // SANBAY    
-                                    try
-                                    {
-                                        for (int j = 2; j <= row; j++)
-                                        {
-                                            string maSanBay = valueArray[j, 1].ToString();
-                                            string tenSanBay = valueArray[j, 2].ToString();
-                                            string tinh = valueArray[j, 3].ToString();
-                                            string quocGia = valueArray[j, 4].ToString();
-                                            Console.WriteLine(maSanBay + tenSanBay + tinh + quocGia);
-                                            command = "INSERT INTO SANBAY VALUES("
-                                             + "'" + maSanBay + "'" + ", "
-                                             + "N'" + tenSanBay + "'" + ", "
-                                             + "N'" + tinh + "'" + ", " + "N'" + quocGia + "'" + ")";
-                                            ExcuteCommand(command);
-                                        }
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        MessageBox.Show(ex.ToString());
-                                        return;
-                                    }
-                                    break;
-                                case 2: // CHUYENBAY
-                                    try
-                                    {
-                                        for (int j = 2; j <= row; j++)
-                                        {
-                                            if (valueArray[j, 1] == null)
-                                            {
-                                                break;
-                                            }
-                                            string maChuyenBay = valueArray[j, 1].ToString();
-                                            long giaVeHang1 = long.Parse(valueArray[j, 2].ToString());
-                                            long giaVeHang2 = long.Parse(valueArray[j, 3].ToString());
-                                            string sanBayDi = valueArray[j, 4].ToString();
-                                            string sanBayDen = valueArray[j, 5].ToString();
-                                            string ngayBay = valueArray[j, 6].ToString();
-                                            string gioBay = valueArray[j, 13].ToString();
-                                            int thoiGianBay = int.Parse(valueArray[j, 8].ToString());
-                                            int hang1 = int.Parse(valueArray[j, 9].ToString());
-                                            int hang2 = int.Parse(valueArray[j, 10].ToString());
-                                            int hang1conlai = int.Parse(valueArray[j, 11].ToString());
-                                            int hang2conlai = int.Parse(valueArray[j, 12].ToString());
-
-                                            Console.WriteLine(maChuyenBay + giaVeHang1 + " " + giaVeHang2 + sanBayDi + sanBayDen + ngayBay);
-
-
-                                            command = "insert into chuyenbay values("
-                                             + "'" + maChuyenBay + "'" + ", "
-                                             + giaVeHang2 + ", " + giaVeHang1 + ", " + "'" + sanBayDi + "'" + ", "
-                                             + "'" + sanBayDen + "'" + ", " + "'" + ngayBay + "'" + ", "
-                                             + "'" + gioBay + "'" + ", " + thoiGianBay + ", " + hang1 + ", "
-                                             + hang2 + ", " + hang1conlai + ", " + hang2conlai + ")";
-                                            ExcuteCommand(command);
-                                        }
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        MessageBox.Show(ex.ToString());
-                                        return;
-                                    }
-                                    break;
-                                case 3: // SANBAYTRUNGGIAN
-                                    try
-                                    {
-                                        for (int j = 2; j <= row; j++)
-                                        {
-                                            string chuyenBay = valueArray[j, 1].ToString();
-                                            string sanbay = valueArray[j, 2].ToString();
-                                            int thoiGianDung = int.Parse(valueArray[j, 3].ToString());
-                                            command = "INSERT INTO SANBAYTRUNGGIAN VALUES("
-                                             + "'" + chuyenBay + "'" + ", "
-                                             + "'" + sanbay + "'" + ", "
-                                             + thoiGianDung + ")";
-                                            ExcuteCommand(command);
-                                        }
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        MessageBox.Show(ex.ToString());
-                                        return;
-                                    }
-                                    break;
-                            }
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.ToString());
-                        return;
-                    }
-                    searchControl1.LoadData();
-                    MessageBox.Show("Data update successful !");
-
-                }
-                else
-                {
-                    MessageBox.Show("No file was selected !", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-            }
-            else
-            {
-                MessageBox.Show("You don't have permission !");
-            }
-            LoginForm.Connection.CloseConn();
+            form1Controller.Update_DB(openFileDialog1);
 
         }
 
         private void reportBt_Click(object sender, EventArgs e)
         {
-            if (CheckUser(LoginForm.loaiNguoiDung))
+            if (form1Controller.CheckUser(LoginForm.loaiNguoiDung))
             {
 
                 HidePicture();
@@ -210,7 +80,7 @@ namespace Airline
 
         private void changeBt_Click(object sender, EventArgs e)
         {
-            if (CheckUser(LoginForm.loaiNguoiDung))
+            if (form1Controller.CheckUser(LoginForm.loaiNguoiDung))
             {
                 HidePicture();
             ruleChangeControl1.Visible = true;
@@ -229,7 +99,7 @@ namespace Airline
 
         private void closeBt_Click(object sender, EventArgs e)
         {
-            LoginForm.Connection.CloseConn();
+            ConnectEntity.Connection.CloseConn();
             this.Close();
         }
 
@@ -299,7 +169,7 @@ namespace Airline
 
         private void bunifuFlatButton1_Click(object sender, EventArgs e)
         {
-            LoginForm.Connection.Connection.Close();
+            ConnectEntity.Connection.CloseConn();
            Application.Exit();
         }
 
@@ -342,7 +212,7 @@ namespace Airline
 
         public void ExcuteCommand(string command)
         {
-            SqlCommand cmd = new SqlCommand(command, LoginForm.Connection.Connection);
+            SqlCommand cmd = new SqlCommand(command, ConnectEntity.Connection.Connection);
             cmd.ExecuteNonQuery();
         }
 

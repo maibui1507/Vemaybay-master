@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using Airline.DAO;
 using System.Data.SqlClient;
 namespace Airline
 {
@@ -27,7 +27,7 @@ namespace Airline
             // load sân bay đến và sân bay đi
 
             string sql = "SELECT TINH FROM dbo.SANBAY ORDER BY MASANBAY ASC";
-            SqlCommand cmd = new SqlCommand(sql, LoginForm.Connection.Connection);
+            SqlCommand cmd = new SqlCommand(sql, ConnectEntity.Connection.Connection);
             SqlDataReader myReader;
             try
             {
@@ -87,7 +87,7 @@ namespace Airline
                 "' AND SB2.TINH=N'" + toStation.selectedValue +
                "' AND NGAY='" + datePicker.Value.ToString() + "'";
            
-            SqlCommand cmd = new SqlCommand(sql, LoginForm.Connection.Connection);
+            SqlCommand cmd = new SqlCommand(sql, ConnectEntity.Connection.Connection);
             cmd.CommandType = CommandType.Text;
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();

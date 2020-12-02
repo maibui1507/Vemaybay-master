@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
-
+using Airline.DAO;
 
 namespace Airline
 {
@@ -91,7 +91,7 @@ namespace Airline
                 string sql = "SELECT COUNT(MAVE) FROM VE";
 
                 #region Lấy số lượng vé hiện tại
-                SqlCommand cmd = new SqlCommand(sql, LoginForm.Connection.Connection);
+                SqlCommand cmd = new SqlCommand(sql, ConnectEntity.Connection.Connection);
                 cmd.CommandType = CommandType.Text;
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();

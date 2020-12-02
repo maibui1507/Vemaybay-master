@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Data.SqlClient;
+using Airline.DAO;
 namespace Airline
 {
     public partial class ReportControl : UserControl
@@ -27,7 +28,7 @@ namespace Airline
         
         private void reportBt_Click(object sender, EventArgs e)
         {
-            LoginForm.Connection.OpenConn();
+            ConnectEntity.Connection.OpenConn();
             string test = "";
             test = countMoney();
             Console.WriteLine(test);
@@ -38,7 +39,7 @@ namespace Airline
             }
             string sql = "SELECT VE.MAVE, VE.MACHUYENBAY,VE.MAKHACHHANG, VE.HANGVE, VE.GIAVE, VE.NGAYDATVE FROM VE WHERE month(VE.NGAYDATVE)=" +
                 monthRp.selectedValue + " AND YEAR(VE.NGAYDATVE)=" + yearRp.selectedValue;
-            SqlCommand cmd = new SqlCommand(sql, LoginForm.Connection.Connection);
+            SqlCommand cmd = new SqlCommand(sql, ConnectEntity.Connection.Connection);
             cmd.CommandType = CommandType.Text;
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
@@ -145,7 +146,7 @@ namespace Airline
             string sql = "SELECT sum(VE.GIAVE) FROM VE WHERE month(VE.NGAYDATVE)=" +
                 monthRp.selectedValue + " AND YEAR(VE.NGAYDATVE)=" + yearRp.selectedValue;
 
-            SqlCommand cmd = new SqlCommand(sql, LoginForm.Connection.Connection);
+            SqlCommand cmd = new SqlCommand(sql, ConnectEntity.Connection.Connection);
             SqlDataReader myReader;
 
             myReader = cmd.ExecuteReader();
@@ -159,7 +160,7 @@ namespace Airline
                 bool exist=false;
                 // kiem tra da co thang nam trong bang doanh thu hay chua
                 sql = "SELECT * FROM DOANHTHU WHERE THANG='" + monthRp.selectedValue + "' AND NAM='" + yearRp.selectedValue + "'";
-                cmd = new SqlCommand(sql, LoginForm.Connection.Connection);
+                cmd = new SqlCommand(sql, ConnectEntity.Connection.Connection);
                 myReader = cmd.ExecuteReader();
                 myReader.Read();
                 if (myReader.HasRows) exist = true;
@@ -167,14 +168,14 @@ namespace Airline
                 if (exist == false)
                 {
                     sql = "INSERT INTO DOANHTHU VALUES('" + monthRp.selectedValue + "','" + yearRp.selectedValue + "','" + revenue + "')";
-                    cmd = new SqlCommand(sql, LoginForm.Connection.Connection);
+                    cmd = new SqlCommand(sql, ConnectEntity.Connection.Connection);
                     cmd.ExecuteNonQuery();
                 }
                 else
                 {
                     sql = "UPDATE DOANHTHU SET DOANHTHU=" +revenue
                         +" WHERE THANG='" + monthRp.selectedValue + "'AND NAM='" + yearRp.selectedValue + "'";
-                    cmd = new SqlCommand(sql, LoginForm.Connection.Connection);
+                    cmd = new SqlCommand(sql, ConnectEntity.Connection.Connection);
                     cmd.ExecuteNonQuery();
                 }
                 revenue = money(double.Parse(revenue).ToString()) + " VNĐ";

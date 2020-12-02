@@ -19,16 +19,16 @@ namespace Airline
         
         public static string accountName;
         public static string loaiNguoiDung;
-        private static ConnectToSQL connection =new ConnectToSQL();
+        
         private static LoginController loginController = new LoginController();
 
-        internal static ConnectToSQL Connection { get => connection; set => connection = value; }
+        
 
         public string AccountName { get => accountName; set => accountName = value; }
 
         public LoginForm()
         {
-            Connection.OpenConn();
+            
             InitializeComponent();
             tbPassword.isPassword = true;
         }

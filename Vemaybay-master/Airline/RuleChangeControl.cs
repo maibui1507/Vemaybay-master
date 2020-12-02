@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using Airline.DAO;
 using System.Data.SqlClient;
 
 namespace Airline
@@ -55,7 +55,7 @@ namespace Airline
             {
                 cmd.CommandText = "Update dbo.QUYDINH6 set SOLUONGSANBAY = " + value;
                 cmd.CommandType = CommandType.Text;
-                cmd.Connection = LoginForm.Connection.Connection;
+                cmd.Connection = ConnectEntity.Connection.Connection;
                 try
                 {
                     cmd.ExecuteNonQuery();
@@ -75,7 +75,7 @@ namespace Airline
             {
                 cmd.CommandText = "Update dbo.QUYDINH6 set THOIGIANBAYTOITHIEU = " + value;
                 cmd.CommandType = CommandType.Text;
-                cmd.Connection = LoginForm.Connection.Connection;
+                cmd.Connection = ConnectEntity.Connection.Connection;
                 try
                 {
                     cmd.ExecuteNonQuery();
@@ -95,7 +95,7 @@ namespace Airline
             {
                 cmd.CommandText = "Update dbo.QUYDINH6 set SOSANBAYTRUNGGIANTOIDA = " + value;
                 cmd.CommandType = CommandType.Text;
-                cmd.Connection = LoginForm.Connection.Connection;
+                cmd.Connection = ConnectEntity.Connection.Connection;
                 try
                 {
                     cmd.ExecuteNonQuery();
@@ -115,7 +115,7 @@ namespace Airline
             {
                 cmd.CommandText = "Update dbo.QUYDINH6 set THOIGIANDUNGTOITHIEU = " + value;
                 cmd.CommandType = CommandType.Text;
-                cmd.Connection = LoginForm.Connection.Connection;
+                cmd.Connection = ConnectEntity.Connection.Connection;
                 try
                 {
                     cmd.ExecuteNonQuery();
@@ -135,7 +135,7 @@ namespace Airline
             {
                 cmd.CommandText = "Update dbo.QUYDINH6 set THOOIGIANDUNGTOIDA = " + value;
                 cmd.CommandType = CommandType.Text;
-                cmd.Connection = LoginForm.Connection.Connection;
+                cmd.Connection = ConnectEntity.Connection.Connection;
                 try
                 {
                     cmd.ExecuteNonQuery();
@@ -155,7 +155,7 @@ namespace Airline
             {
                 cmd.CommandText = "Update dbo.QUYDINH6 set SOLUONGVEHANG1 = " + value;
                 cmd.CommandType = CommandType.Text;
-                cmd.Connection = LoginForm.Connection.Connection;
+                cmd.Connection = ConnectEntity.Connection.Connection;
                 try
                 {
                     cmd.ExecuteNonQuery();
@@ -175,7 +175,7 @@ namespace Airline
             {
                 cmd.CommandText = "Update dbo.QUYDINH6 set SOLUONGVEHANG2 = " + value;
                 cmd.CommandType = CommandType.Text;
-                cmd.Connection = LoginForm.Connection.Connection;
+                cmd.Connection = ConnectEntity.Connection.Connection;
                 try
                 {
                     cmd.ExecuteNonQuery();
@@ -196,7 +196,7 @@ namespace Airline
             {
                 cmd.CommandText = "Update dbo.QUYDINH6 set THOIGIANDATVECHAMNHAT = " + value;
                 cmd.CommandType = CommandType.Text;
-                cmd.Connection = LoginForm.Connection.Connection;
+                cmd.Connection = ConnectEntity.Connection.Connection;
                 try
                 {
                     cmd.ExecuteNonQuery();
@@ -216,7 +216,7 @@ namespace Airline
             {
                 cmd.CommandText = "Update dbo.QUYDINH6 set THOIGIANHUYDATVE = " + value;
                 cmd.CommandType = CommandType.Text;
-                cmd.Connection = LoginForm.Connection.Connection;
+                cmd.Connection = ConnectEntity.Connection.Connection;
                 try
                 {
                     cmd.ExecuteNonQuery();

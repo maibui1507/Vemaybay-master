@@ -8,10 +8,10 @@ using System.Data.SqlClient;
 
 namespace Airline
 {
-    class ConnectToSQL
+    public class ConnectToSQL
     {
         #region Available
-        private SqlConnection Conn;
+        public SqlConnection Conn { get; set; }
        
         private SqlCommand CMD;
 
@@ -19,7 +19,7 @@ namespace Airline
         public SqlConnection Connection { get { return Conn; } }
 
 
-        private string error;
+        public string error;
         public string Error { get => error; set => error = value; }
         string strCon;
         #endregion
@@ -27,14 +27,14 @@ namespace Airline
         #region Constructor
         public ConnectToSQL()
         {
-            string path = System.IO.Path.GetFullPath(Environment.CurrentDirectory);
-            string databaseName = "AIRLINE.mdf";
+            //string path = System.IO.Path.GetFullPath(Environment.CurrentDirectory);
+            //string databaseName = "AIRLINE.mdf";
             //strCon = @"Data Source=(localdb)\mssqllocaldb;AttachDbFilename=" + path + @"\" + databaseName + ";Integrated Security=True";;
             strCon = @"Data Source=ADMIN\SQLEXPRESS;Initial Catalog=AIRLINE;Integrated Security=True";
             Conn = new SqlConnection(strCon);
         }
         #endregion
-        
+
         #region Methods
         public bool OpenConn()
         {
@@ -43,7 +43,7 @@ namespace Airline
                 if (Conn.State == ConnectionState.Closed)
                     Conn.Open();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 error = ex.Message;
                 return false;
