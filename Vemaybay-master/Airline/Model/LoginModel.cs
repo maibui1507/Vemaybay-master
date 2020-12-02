@@ -24,6 +24,7 @@ namespace Airline.Model
 
             data.Fill(dataTable);
             data.Dispose();
+            Connection.CloseConn();
             return dataTable;
         }
          ~LoginModel()

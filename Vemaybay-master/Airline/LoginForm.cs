@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using Airline.Controller;
 namespace Airline
 {
     public partial class LoginForm : Form
@@ -20,6 +20,7 @@ namespace Airline
         public static string accountName;
         public static string loaiNguoiDung;
         private static ConnectToSQL connection =new ConnectToSQL();
+        private static LoginController loginController = new LoginController();
 
         internal static ConnectToSQL Connection { get => connection; set => connection = value; }
 
@@ -44,27 +45,13 @@ namespace Airline
             string password = tbPassword.Text;
             accountName = tbUser.Text;
 
-            //string sql = "SELECT TENNGUOIDUNG, MATKHAU, LOAINGUOIDUNG FROM NGUOIDUNG WHERE TENNGUOIDUNG = '"
-            //    + username + "' AND MATKHAU = '" + password + "'";
 
-            //DataTable dataTable = new DataTable();
-            //SqlDataAdapter data = new SqlDataAdapter(sql, Connection.Connection);
-
-            //data.Fill(dataTable);
-            DataTable dataTable = loginModel.Check_account(username, password);
-
-            if (dataTable.Rows.Count == 0)
-                MessageBox.Show("Incorrect username or password !", "Warning", 
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            else
-            {
-                DataRow row = dataTable.Select()[0];
-                loaiNguoiDung = row[2].ToString();
-                //data.Dispose();
+            
+            bool check = loginController.Check_Login(username, password);
+            if (check == true) {
                 this.Hide();
                 Form1 form = new Form1();
                 form.Show();
-                Connection.CloseConn();
             }
         }
 
@@ -90,26 +77,12 @@ namespace Airline
                 string password = tbPassword.Text;
                 accountName = username;
 
-                string sql = "SELECT TENNGUOIDUNG, MATKHAU, LOAINGUOIDUNG FROM NGUOIDUNG WHERE TENNGUOIDUNG = '"
-                    + username + "' AND MATKHAU = '" + password + "'";
-
-                DataTable dataTable = new DataTable();
-                SqlDataAdapter data = new SqlDataAdapter(sql, Connection.Connection);
-                dataTable.Clear();
-                data.Fill(dataTable);
-
-                if (dataTable.Rows.Count == 0)
-                    MessageBox.Show("Incorrect username or password !", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                else
+                bool check = loginController.Check_Login(username, password);
+                if (check == true)
                 {
-                    DataRow row = dataTable.Select()[0];
-                    loaiNguoiDung = row[2].ToString();
-                    data.Dispose();
-                    
                     this.Hide();
-                    Form1 form = new Form1();                    
+                    Form1 form = new Form1();
                     form.Show();
-                    
                 }
             }
 
@@ -123,27 +96,12 @@ namespace Airline
                 string password = tbPassword.Text;
                 accountName = username;
 
-                string sql = "SELECT TENNGUOIDUNG, MATKHAU, LOAINGUOIDUNG FROM NGUOIDUNG WHERE TENNGUOIDUNG = '"
-                    + username + "' AND MATKHAU = '" + password + "'";
-
-                DataTable dataTable = new DataTable();
-                SqlDataAdapter data = new SqlDataAdapter(sql, Connection.Connection);
-
-
-                data.Fill(dataTable);
-
-
-                if (dataTable.Rows.Count == 0)
-                    MessageBox.Show("Incorrect username or password !", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                else
+                bool check = loginController.Check_Login(username, password);
+                if (check == true)
                 {
-                    DataRow row = dataTable.Select()[0];
-                    loaiNguoiDung = row[2].ToString();
-                    data.Dispose();
                     this.Hide();
-                    Form1 form1 = new Form1();
-                    form1.Show();
-                    
+                    Form1 form = new Form1();
+                    form.Show();
                 }
             }
         }
