@@ -20,7 +20,7 @@ namespace Airline
         private long _giaVeHang1, _giaVeHang2;
 
         int hangVe = 1;
-        bool gioiTinh = true;
+        private bool gioiTinh = true;
         long _price = 0;
 
         public SaleControl()

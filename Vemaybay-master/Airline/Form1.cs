@@ -12,6 +12,7 @@ using Excel = Microsoft.Office.Interop.Excel;
 using System.Data.SqlClient;
 using System.Data.OleDb;
 using System.IO;
+using Airline.Model;
 
 namespace Airline
 {
@@ -66,7 +67,7 @@ namespace Airline
                     //Console.WriteLine(openFileDialog1.FileName);
                     // tạo đối tượng excel
                     Excel.Application xlApp = new Excel.Application();
-                    LoginForm.Connection.OpenConn();
+                    LoginModel.Connection.OpenConn();
                     try
                     {
                         Excel.Workbook workbook = xlApp.Workbooks.Open(openFileDialog1.FileName);
