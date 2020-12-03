@@ -27,6 +27,7 @@ namespace Airline
         #region Constructor
         public ConnectToSQL()
         {
+            //aa
             //string path = System.IO.Path.GetFullPath(Environment.CurrentDirectory);
             //string databaseName = "AIRLINE.mdf";
             //strCon = @"Data Source=(localdb)\mssqllocaldb;AttachDbFilename=" + path + @"\" + databaseName + ";Integrated Security=True";;
