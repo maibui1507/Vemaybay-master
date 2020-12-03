@@ -12,7 +12,7 @@ namespace Airline.Controller
     class Form1Controller
     {
         SearchControl searchControl1;
-        public Form1Model form1Model = new Form1Model();
+        public Form1DAO form1DAO = new Form1DAO();
         public bool CheckUser(string s)
         {
             if (s == "True")
@@ -59,8 +59,8 @@ namespace Airline.Controller
                                             string tenSanBay = valueArray[j, 2].ToString();
                                             string tinh = valueArray[j, 3].ToString();
                                             string quocGia = valueArray[j, 4].ToString();
-                                            form1Model.Update_Sanbay(maSanBay,tenSanBay,tinh,quocGia);
-                                            form1Model.ExcuteCommand(form1Model.command);
+                                            form1DAO.Update_Sanbay(maSanBay,tenSanBay,tinh,quocGia);
+                                            form1DAO.ExcuteCommand(form1DAO.command);
                                         }
                                     }
                                     catch (Exception ex)
@@ -94,9 +94,9 @@ namespace Airline.Controller
                                             Console.WriteLine(maChuyenBay + giaVeHang1 + " " + giaVeHang2 + sanBayDi + sanBayDen + ngayBay);
 
 
-                                            form1Model.Update_ChuyenBay(maChuyenBay, giaVeHang1, giaVeHang2, sanBayDi,sanBayDen,
+                                            form1DAO.Update_ChuyenBay(maChuyenBay, giaVeHang1, giaVeHang2, sanBayDi,sanBayDen,
                                                 ngayBay,gioBay,thoiGianBay,hang1,hang2,hang1conlai,hang2conlai);
-                                            form1Model.ExcuteCommand(form1Model.command);
+                                            form1DAO.ExcuteCommand(form1DAO.command);
                                         }
                                     }
                                     catch (Exception ex)
@@ -113,8 +113,8 @@ namespace Airline.Controller
                                             string chuyenBay = valueArray[j, 1].ToString();
                                             string sanbay = valueArray[j, 2].ToString();
                                             int thoiGianDung = int.Parse(valueArray[j, 3].ToString());
-                                            form1Model.Update_SanBayTrungGian(chuyenBay, sanbay, thoiGianDung);
-                                            form1Model.ExcuteCommand(form1Model.command);
+                                            form1DAO.Update_SanBayTrungGian(chuyenBay, sanbay, thoiGianDung);
+                                            form1DAO.ExcuteCommand(form1DAO.command);
                                         }
                                     }
                                     catch (Exception ex)

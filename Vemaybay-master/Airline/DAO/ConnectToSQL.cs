@@ -30,7 +30,7 @@ namespace Airline
             //string path = System.IO.Path.GetFullPath(Environment.CurrentDirectory);
             //string databaseName = "AIRLINE.mdf";
             //strCon = @"Data Source=(localdb)\mssqllocaldb;AttachDbFilename=" + path + @"\" + databaseName + ";Integrated Security=True";;
-            strCon = @"Data Source=ADMIN\SQLEXPRESS;Initial Catalog=AIRLINE;Integrated Security=True";
+            strCon = @"Data Source=DESKTOP-EKOKVTF\SQLEXPRESS;Initial Catalog=AIRLINE;Integrated Security=True";
             Conn = new SqlConnection(strCon);
         }
         #endregion

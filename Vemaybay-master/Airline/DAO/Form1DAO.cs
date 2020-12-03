@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 using Airline.DAO;
 namespace Airline.Model
 {
-    class Form1Model
+    class Form1DAO
     {
         public string command = "";
-        public Form1Model()
+        public Form1DAO()
         {
             ConnectEntity.Connection.OpenConn();
         }

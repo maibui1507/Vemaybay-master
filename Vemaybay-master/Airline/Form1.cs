@@ -265,7 +265,7 @@ namespace Airline
         {
             // image = new Bitmap(@"C:\Users\Admin\Downloads\Vemaybay-master\Vemaybay-master\Airline\Resources\background.gif");
             //Console.WriteLine(Path.Combine(Application.StartupPath, @"..\..\Resources\background.gif"));
-            this.BackgroundImage = Image.FromFile(Path.Combine(Application.StartupPath, @"..\..\Resources\background.gif"));
+            this.BackgroundImage = Image.FromFile(Path.Combine(Application.StartupPath, @"..\..\Resources\background.png"));
                 
         }
 

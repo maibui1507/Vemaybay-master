@@ -7,15 +7,14 @@ using System.Text;
 using System.Threading.Tasks;
 using Airline.DAO;
 
-namespace Airline.Model
+namespace Airline.DAO
 {
-     public class LoginModel
+    class LoginDAO
     {
-        //private static ConnectToSQL connection = new ConnectToSQL();
-        //internal static ConnectToSQL Connection { get => connection; set => connection = value; }
         public static ConnectEntity connectEntity = new ConnectEntity();
-        public LoginModel(){
-            
+        public LoginDAO()
+        {
+
         }
         public DataTable Check_account(string username, string password)
         {
@@ -23,17 +22,16 @@ namespace Airline.Model
                 + username + "' AND MATKHAU = '" + password + "'";
             DataTable dataTable = new DataTable();
             SqlDataAdapter data = new SqlDataAdapter(sql, ConnectEntity.Connection.Connection);
-            
+
 
             data.Fill(dataTable);
             data.Dispose();
             ConnectEntity.Connection.CloseConn();
             return dataTable;
         }
-         ~LoginModel()
+        ~LoginDAO()
         {
             ConnectEntity.Connection.CloseConn();
         }
-
     }
 }

@@ -5,12 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Airline.DAO;
 using Airline.Model;
 namespace Airline.Controller
 {
     class LoginController
     {
-        private static LoginModel loginModel = new LoginModel();
+        private static LoginDAO loginDAO = new LoginDAO();
        
         public static string loaiNguoiDung;
        
@@ -20,7 +21,7 @@ namespace Airline.Controller
         public bool Check_Login(string username, string password)
         {
             bool check = false;
-            DataTable dataTable = loginModel.Check_account(username, password);
+            DataTable dataTable = loginDAO.Check_account(username, password);
             if (dataTable.Rows.Count == 0)
                 MessageBox.Show("Incorrect username or password !", "Warning",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
